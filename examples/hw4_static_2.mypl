@@ -1,0 +1,40 @@
+#----------------------------------------------------------------------
+# Basic variable declarations and expressions
+#----------------------------------------------------------------------
+
+struct T {
+}
+
+void good_expressions() {
+
+  var t1: T = new T()
+  
+  # boolean expressions
+  var x1: bool = true
+  var x2: bool = false
+  var e1: bool = null
+  var e2: bool = not false
+  var e3: bool = not not false
+  var e4: bool = not x1
+  var e5: bool = x1 and x2
+  var e6: bool = (x1 and x2) or (x1 and not x1) or (not x1 and not x2)
+  var e7: bool = (t1 == null) or (null == t1) or (null == null) or (null != "foo")
+  var e8: bool = (x1 == x2) and (x1 != x2)
+  var e9: bool = (1 == 2) or (1.1 == 2.0) or ("a" == "b") or ("a" == "b") or (t1 == t1)
+  var e10: bool = (1 != 2) or (1.1 != 2.0) or ("a" != "b") or ("a" != "b") or (t1 != t1)
+  var e11: bool = (1 <= 2) and (1.4 > 1.0) and ("a" >= "b") and ("ab" < "bc")
+
+  # arithmetic expressions
+  var i1: int = 6 + 3
+  var d1: double = 3.14 + 2.1
+  var s1: string = "ab" + "cd"
+  var i2: int = i1 - i1
+  var i3: int = i2 - 5 - 6
+  var i4: int = i1 * 3 - (i2 / i3)
+  var i5: int = 1 + 2 * 3 / 4
+  var d2: double = d1 - d1 * d1 - d1 * 4.117
+  var d3: double = 1.0 + 2.0 * 3.0 / 4.0
+}
+
+void main() {
+}

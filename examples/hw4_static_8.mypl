@@ -1,0 +1,18 @@
+#----------------------------------------------------------------------
+# More on arrays
+#----------------------------------------------------------------------
+
+void main() {
+  var xs: [int] = new int[100]
+  xs[0] = 1
+  var ys: [string] = new string[100]
+  ys[0] = "1"
+  var zs: [double] = new double[50]
+  zs[0] = 3.1
+  var x: int = xs[99]
+  var y: string = ys[99]
+  var z: double = zs[49]
+  var xs_ref: [int] = xs
+  var ys_ref: [string] = ys
+  var zs_ref: [double] = zs
+}

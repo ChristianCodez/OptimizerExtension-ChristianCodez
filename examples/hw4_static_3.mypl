@@ -1,0 +1,91 @@
+#----------------------------------------------------------------------
+# Basic conditionals
+#----------------------------------------------------------------------
+
+void main() {
+
+  var flag1: bool = true
+  var flag2: bool = false
+
+  while true {
+  }
+
+  while flag1 {
+  }
+
+  while flag2 {
+  }
+
+  while true {
+    while false {
+    }
+    while flag1 {
+    }
+  }
+
+  while flag1 {
+    var flag3: bool = true
+    while flag3 {
+      var flag1: bool = false
+    }
+  }
+
+  if true {
+  }
+
+  if flag1 {
+  }
+
+  if flag1 {
+    var flag3: bool = false
+  }
+  else {
+    var flag3: bool = true
+  }
+
+  if true {
+    var flag3 = false
+  }
+  else if flag2 {
+    var flag3 = false
+  }
+  else {
+    var flag3 = false
+  }
+
+  if true {
+    var flag3 = false
+  }
+  else if flag2 {
+    var flag3 = false
+  }
+  else if flag1 {
+    var flag3 = false
+  }
+  else {
+    var flag3 = false
+  }
+    
+  if true {
+    var flag1 = false
+    if flag1 {
+      var flag2 = true
+      if flag2 {
+        var flag1 = true
+      }
+      else {
+        var flag1 = true
+      }
+    }
+  }
+
+  while flag1 {
+    if false {
+      var flag1 = false
+    }
+    else {
+      var flag1 = true
+    }
+  }
+
+}

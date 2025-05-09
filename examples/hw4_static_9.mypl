@@ -1,0 +1,17 @@
+#----------------------------------------------------------------------
+# More involved lvalues
+#----------------------------------------------------------------------
+
+struct node {
+  val: int, 
+  children: [node]
+}
+
+void main() {
+  var roots: [node] = new node[20]
+  roots[0] = new node(null, null)
+  roots[0].val = 10
+  roots[0].children = new node[5]
+  roots[0].children[0] = new node(null, null)
+  roots[0].children[0].val = 20
+}

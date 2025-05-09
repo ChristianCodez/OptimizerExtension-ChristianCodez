@@ -1,0 +1,61 @@
+#----------------------------------------------------------------------
+# Struct declarations and path expressions
+#----------------------------------------------------------------------
+
+struct T1 {
+}
+
+struct T2 {
+  x: int
+}
+
+struct T3 {
+  x: int,
+  y: string
+}
+
+struct T4 {
+  x: int,
+  y: string,
+  z: int
+}
+
+struct T5 {
+  x: int,
+  t: T4
+}
+
+struct T6 {
+  t1: T4, 
+  t2: T5,
+  x: int,
+  y: int
+}
+
+struct T7 {
+  x: int,
+  n: T7
+}
+
+struct node {
+  val: int,
+  nxt: node
+}
+
+void good_paths() {
+  var n1: node = new node(0, null)
+  var n2: node = new node(1, null)
+  var n3: node = n1.nxt
+  n1.val = 10
+  n1.nxt = n2
+  n2.val = 20
+  n2.nxt = new node(2, n2)
+  n2.nxt.val = n1.val
+  n2.nxt.nxt = new node(3, n3)
+  n2.nxt.nxt.val = n2.nxt.val
+}
+
+
+void main() {
+}
+

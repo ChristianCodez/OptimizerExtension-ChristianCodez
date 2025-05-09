@@ -1,0 +1,29 @@
+#----------------------------------------------------------------------
+# Basic structs and functions
+#----------------------------------------------------------------------
+
+struct t1 {
+  field1: int
+}
+
+struct t2 {
+  field1: double,
+  filed2: string
+}
+
+void f1() {
+}
+
+int f2() {
+}
+
+string f3(x: int) {
+}
+
+bool f4(str: string, index: int) {
+}
+
+void main() {
+}
+
+

@@ -1,0 +1,56 @@
+#----------------------------------------------------------------------
+# function calls and return statements
+#----------------------------------------------------------------------
+
+void f1() {
+  var x: int x = 1
+  return null
+}
+
+int f2() {
+  var x: int = 1
+  return 0
+}
+
+bool f3() {
+  return true
+}
+
+bool f4() {
+  var x: bool = f3()
+  return x
+}
+
+int f5() {
+  return f5()
+}
+
+void f6(x: int) {
+  f6(x - 1)
+  return null
+}
+
+void f7(x: int, y: bool) {
+  return f7(1, y and f4())
+}
+
+int f8(x: int, y: string, z: int) {
+  f8(f7(1, true), "", 42)
+  return null
+}
+
+
+void main() {
+  print("hello world")
+  var x: int = int_val("1")
+  var y: double = dbl_val("3.14")
+  var z: string = str_val(42)
+  var u: string = str_val(3.14159)
+  var v: string = get(0, "ab")
+  var r: int = size("ab")
+  var s1: string = "Please enter " + "your name: "
+  println(s1)
+  var s2: string = readln()
+  s1 = "Hi " + s2
+  s1 = s1 + "." + " How " + "are you?"
+}

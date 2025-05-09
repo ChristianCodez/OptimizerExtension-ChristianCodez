@@ -1,0 +1,36 @@
+#----------------------------------------------------------------------
+# basic functions and structs
+#----------------------------------------------------------------------
+
+int a(x: int) {
+  return x + 1
+}
+
+int b(y: int) {
+  var x = a(y)
+  return x
+}
+
+struct T {
+  x: int,
+  y: string
+}
+
+T c(x: int) {
+  var t: T = new T(10, null)
+  return t
+}
+
+string d(par1: string, par2: int) {
+  if (par2 > 0) and (par2 < 10) and (size(par1) != 0) {
+    return par1
+  }
+  else {
+    return str_val(par2)
+  }
+}
+
+void main() {
+  d("foo", 1)
+}
+

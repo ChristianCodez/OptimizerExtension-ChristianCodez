@@ -1,0 +1,176 @@
+-------------------------------------------------------------------------------
+Test set: cpsc326.SemanticCheckerTests
+-------------------------------------------------------------------------------
+Tests run: 140, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.403 s <<< FAILURE! -- in cpsc326.SemanticCheckerTests
+cpsc326.SemanticCheckerTests.illegalNonNullReturn -- Time elapsed: 0.050 s
+cpsc326.SemanticCheckerTests.validInferedTypeVarStatements -- Time elapsed: 0.003 s
+cpsc326.SemanticCheckerTests.basicIfStatements -- Time elapsed: 0.003 s
+cpsc326.SemanticCheckerTests.badArrayAssignment -- Time elapsed: 0.007 s
+cpsc326.SemanticCheckerTests.exprWithParens -- Time elapsed: 0.005 s
+cpsc326.SemanticCheckerTests.illegalNonBoolElseIfCondition -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.lvalueWithWrongType -- Time elapsed: 0.005 s
+cpsc326.SemanticCheckerTests.extremeVariableShadowingWorking -- Time elapsed: 0.005 s
+cpsc326.SemanticCheckerTests.assignmentWithArrayTypeMismatch -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.basicReadlnCalls -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.createArrayWithMismatchedBaseType -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.getTooManyArgs -- Time elapsed: 0.003 s
+cpsc326.SemanticCheckerTests.illegalBoolArrayWhileCondition -- Time elapsed: 0.003 s
+cpsc326.SemanticCheckerTests.basicStructCreation -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.illegalLogicalOrWithString -- Time elapsed: 0.007 s
+cpsc326.SemanticCheckerTests.printlnTooFewArgs -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.basicForStatements -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.rvalueWithBadArrayType -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.mainWithParams -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.dblValWrongReturnType -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.basicCastFunctionCalls -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.getWrongReturnType -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.illegalNullIfCondition -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.callWithTooManyArgs -- Time elapsed: 0.010 s
+cpsc326.SemanticCheckerTests.illegalBoolArrayIfCondition -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.illegalArrayRelationalComparison -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.basicWhileStatements -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.combinedRelationalOperators -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.functionWithTwoSameNamedParams -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.structsMutualReference -- Time elapsed: 0 s
+cpsc326.SemanticCheckerTests.structCreationTooManyArgs -- Time elapsed: 0.007 s
+cpsc326.SemanticCheckerTests.illegalLogicalNegationWithInt -- Time elapsed: 0.003 s
+cpsc326.SemanticCheckerTests.dblValWrongArgType -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.structCreationTooFewArgs -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.validNestedArrayAndStructArrayVarStatements -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.mismatchedNonArrayIntVarStatementTypes -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.assignmentWithBaseTypeMismatch -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.basicGetFunctionCalls -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.illegalNullInForFrom -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.sizeTooManyArgs -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.callWithWrongNonArrayArgType -- Time elapsed: 0.007 s
+cpsc326.SemanticCheckerTests.printArrayObject -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.functionWithStructParam -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.redefinedBuiltIn -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.functionWithBadReturnType -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.printlnArrayObject -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.functionWithBadArrayParameterType -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.callWithTooFewArgs -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.illegalAdditionWithIntAndArray -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.functionWithBadParameterType -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.basicAssignmentStatements -- Time elapsed: 0 s
+cpsc326.SemanticCheckerTests.nestedArrayIndexingOnNonArray -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.exprWithNoParens -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.lvalueWithCorrectType -- Time elapsed: 0.007 s <<< ERROR!
+cpsc326.MyPLException: STATIC_ERROR: [4,5] Trying to index non-array type
+	at cpsc326.MyPLException.staticError(MyPLException.java:56)
+	at cpsc326.SemanticChecker.error(SemanticChecker.java:99)
+	at cpsc326.SemanticChecker.visit(SemanticChecker.java:830)
+	at cpsc326.AssignStmt.accept(AST.java:217)
+	at cpsc326.SemanticChecker.visit(SemanticChecker.java:218)
+	at cpsc326.FunDef.accept(AST.java:54)
+	at cpsc326.SemanticChecker.visit(SemanticChecker.java:168)
+	at cpsc326.Program.accept(AST.java:34)
+	at cpsc326.SemanticCheckerTests.lvalueWithCorrectType(SemanticCheckerTests.java:1964)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+cpsc326.SemanticCheckerTests.printStructObject -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.structCreationWrongArgType -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.basicSizeFunctionCalls -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.illegalMultiplication -- Time elapsed: 0.008 s
+cpsc326.SemanticCheckerTests.illegalLogicalAndWithInt -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.illegalNonArrayRelationalComparison -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.sizeWrongReturnType -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.intValTooFewArgs -- Time elapsed: 0.003 s
+cpsc326.SemanticCheckerTests.validFullBaseTypeArrayVarStatements -- Time elapsed: 0 s
+cpsc326.SemanticCheckerTests.callWithTwoParamsAndTooManyArgs -- Time elapsed: 0.003 s
+cpsc326.SemanticCheckerTests.oneIllegalExecutionPath -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.basicFunctionCalls -- Time elapsed: 0.003 s
+cpsc326.SemanticCheckerTests.basicStructPathExamples -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.twoFunctionsWithSameName -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.getWrongSecondArgType -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.illegalArrayWithAddition -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.arrayAccess -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.smallestValidProgram -- Time elapsed: 0 s
+cpsc326.SemanticCheckerTests.illegalLifetimeinElse -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.strValTooManyArgs -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.mismatchedNonArrayDoubleVarStatementTypes -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.getWrongFirstArgType -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.basicRelationalOperators -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.getTooFewArgs -- Time elapsed: 0.003 s
+cpsc326.SemanticCheckerTests.illegalNonBoolIfCondition -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.callToUndeclaredFunction -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.accessUndefinedStructField -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.strValTooFewArgs -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.illegalAdditionUsingBools -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.rvalueWithCorrectArrayType -- Time elapsed: 0.002 s <<< ERROR!
+cpsc326.MyPLException: STATIC_ERROR: [4,37] Cannot access field on array type
+	at cpsc326.MyPLException.staticError(MyPLException.java:56)
+	at cpsc326.SemanticChecker.error(SemanticChecker.java:99)
+	at cpsc326.SemanticChecker.visit(SemanticChecker.java:697)
+	at cpsc326.VarRValue.accept(AST.java:179)
+	at cpsc326.SemanticChecker.visit(SemanticChecker.java:311)
+	at cpsc326.BasicExpr.accept(AST.java:98)
+	at cpsc326.SemanticChecker.visit(SemanticChecker.java:751)
+	at cpsc326.VarStmt.accept(AST.java:208)
+	at cpsc326.SemanticChecker.visit(SemanticChecker.java:218)
+	at cpsc326.FunDef.accept(AST.java:54)
+	at cpsc326.SemanticChecker.visit(SemanticChecker.java:168)
+	at cpsc326.Program.accept(AST.java:34)
+	at cpsc326.SemanticCheckerTests.rvalueWithCorrectArrayType(SemanticCheckerTests.java:1991)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+cpsc326.SemanticCheckerTests.printTooFewArgs -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.illegalSubtractionWithNull -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.exprWithParensAndVars -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.callWithWrongArrayReturnType -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.structWithTwoFieldsHavingSameName -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.intValWrongReturnType -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.arrayCreation -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.readlnWrongReturnType -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.assignmentWithBaseTypeToArrayTypeMismatch -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.rvalueWithCorrectType -- Time elapsed: 0 s
+cpsc326.SemanticCheckerTests.callWithWrongNonArrayReturnType -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.illegalBoolInForFrom -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.printlnStructObject -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.extremeVariableShadowingError -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.readlnTooManyArgs -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.illegalDoubleInForTo -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.strValWrongArgType -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.basicFunctionReturnStatements -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.badArrayAccess -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.mismatchedArrayIntVarStatementTypes -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.illegalLifetimeAfterWhile -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.callWithTwoParamsaAndTooFewArgs -- Time elapsed: 0 s
+cpsc326.SemanticCheckerTests.dblValTooFewArgs -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.missingMain -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.localShadow -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.structSelfReference -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.twoStructsWithSameName -- Time elapsed: 0 s
+cpsc326.SemanticCheckerTests.intValTooManyArgs -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.illegalIntWhileCondition -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.sizeTooFewArgs -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.basicPrintCalls -- Time elapsed: 0 s
+cpsc326.SemanticCheckerTests.validFunctionDefs -- Time elapsed: 0 s
+cpsc326.SemanticCheckerTests.rvalueWithWrongType -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.callWithWrongArrayArgType -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.arrayComparisons -- Time elapsed: 0 s
+cpsc326.SemanticCheckerTests.createArrayWithMismatchedStructType -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.illegalLifetimeAfterFor -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.dblValTooManyArgs -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.validFullBaseTypeVarStatements -- Time elapsed: 0 s
+cpsc326.SemanticCheckerTests.illegalShadowing -- Time elapsed: 0.003 s
+cpsc326.SemanticCheckerTests.structWithUndefinedFieldType -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.validVarStatementsWithoutDefs -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.functionWithBadArrayReturnType -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.printTooManyArgs -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.unableToInferType -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.basicAllowedShadowing -- Time elapsed: 0 s
+cpsc326.SemanticCheckerTests.printlnTooManyArgs -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.intValWrongArgType -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.validStructDefs -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.lvalueWithBadArrayType -- Time elapsed: 0.002 s
+cpsc326.SemanticCheckerTests.structAndFunctionWithSameName -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.sizeWrongArgType -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.strValWrongReturnType -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.mainWithWrongReturnType -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.callWithWrongArrayArgToNonArrayParamType -- Time elapsed: 0.001 s
+cpsc326.SemanticCheckerTests.basicAssignmentToNull -- Time elapsed: 0.001 s
