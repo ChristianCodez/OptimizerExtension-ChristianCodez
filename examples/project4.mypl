@@ -1,5 +1,4 @@
 void main() {
     var a = "Hello " + "World" + "!"   # → "Hello World!"
     var b = "A" + ("B" + "C")          # → "ABC"
-    var c = "" + (1 + 2)               # → "3" (if your language supports string coercion)
 }

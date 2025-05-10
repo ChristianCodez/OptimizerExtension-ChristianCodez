@@ -2,6 +2,9 @@
 # Basic variable declarations and expressions
 #----------------------------------------------------------------------
 
+# This was originally a HW4 example program that I thought would be interesting to try against the optimizer.
+# The constant expressions have been optimized but the variables and function dependant values are runtime values and thus not optimizable
+
 struct T {
 }
 

@@ -130,6 +130,26 @@ public class MyPL {
   }
 
   /**
+   * Output the intermediate representation of the given mypl
+   * program.
+   * 
+   * @param input The mypl program as an input stream
+   */
+  private static void irModeNoOptimizer(InputStream input) {
+    try {
+      Lexer lexer = new Lexer(input);
+      ASTParser parser = new ASTParser(lexer);
+      Program p = parser.parse();
+      p.accept(new SemanticChecker());
+      VM vm = new VM();
+      p.accept(new CodeGenerator(vm));
+      System.out.println(vm);
+    } catch (MyPLException e) {
+      System.err.println(e.getMessage());
+    }
+  }
+
+  /**
    * Run the given mypl program.
    * 
    * @param input The mypl program as an input stream
@@ -182,7 +202,7 @@ public class MyPL {
         .defaultHelp(true)
         .description("MyPL interpreter.");
     cmdParser.addArgument("-m", "--mode")
-        .choices("LEX", "PARSE", "PRINT", "CHECK", "OPTIMIZE", "IR", "RUN", "DEBUG")
+        .choices("LEX", "PARSE", "PRINT", "CHECK", "OPTIMIZE", "IR-O", "IR", "RUN", "DEBUG")
         .setDefault("RUN")
         .help("specify execution mode");
     cmdParser.addArgument("file").nargs("?").help("mypl file to execute");
@@ -218,8 +238,10 @@ public class MyPL {
       checkMode(input);
     else if (mode.equals("OPTIMIZE"))
       optimizeMode(input);
-    else if (mode.equals("IR"))
+    else if (mode.equals("IR-O"))
       irMode(input);
+    else if (mode.equals("IR"))
+      irModeNoOptimizer(input);
     else if (mode.equals("DEBUG"))
       debugMode(input);
   }

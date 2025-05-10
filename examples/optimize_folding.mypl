@@ -9,7 +9,8 @@ void main() {
     var i = false or false
     var u = true == true
     var m = not (100 == 5 or 60 / 5 == 12)
-    var d = "Hello "
     var f = "Hello " + "World" + "!"
     var as = 8 - 4 - 2 # if left associative:   2, right associative: 6
 }
+
+# Answers: 14, 6, true, 4, true, false, true, false, true, false, "Hello World!", 2

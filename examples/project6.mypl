@@ -4,5 +4,5 @@ void main() {
         (true or (10 / 3 == 2))
     )                                   # → not (true and true) → false
     
-    var y = ("Res" + (1 + 1)) == "Res2" # → true
+    var y = ("Res" + str_val(1 + 1)) == "Res2" # → ("Res" + str_val(1 + 1)) == "Res2"   # it stays like this becaue the function's output can't be known at compile time
 }
