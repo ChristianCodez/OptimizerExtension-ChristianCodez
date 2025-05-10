@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------------
+Test set: cpsc326.OptimizerFoldingTests
+-------------------------------------------------------------------------------
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 s -- in cpsc326.OptimizerFoldingTests
+cpsc326.OptimizerFoldingTests.testNestedFolding -- Time elapsed: 0.002 s
+cpsc326.OptimizerFoldingTests.testDoubleInequality -- Time elapsed: 0 s
+cpsc326.OptimizerFoldingTests.testDivisionFolding -- Time elapsed: 0.001 s
+cpsc326.OptimizerFoldingTests.testIntFolding -- Time elapsed: 0 s
+cpsc326.OptimizerFoldingTests.testBooleanEqualityFalse -- Time elapsed: 0.002 s
+cpsc326.OptimizerFoldingTests.testBooleanFolding -- Time elapsed: 0.001 s
+cpsc326.OptimizerFoldingTests.testBooleanEqualityTrue -- Time elapsed: 0 s
+cpsc326.OptimizerFoldingTests.testIntEquality -- Time elapsed: 0 s
+cpsc326.OptimizerFoldingTests.constantFoldingTest -- Time elapsed: 0 s
+cpsc326.OptimizerFoldingTests.testDoubleFolding -- Time elapsed: 0.002 s
