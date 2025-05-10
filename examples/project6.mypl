@@ -1,0 +1,8 @@
+void main() {
+    var x = not (
+        (2 * (3 + 4) == 14) and 
+        (true or (10 / 3 == 2))
+    )                                   # → not (true and true) → false
+    
+    var y = ("Res" + (1 + 1)) == "Res2" # → true
+}

@@ -1,5 +1,4 @@
 void main() {
-    
     var x = 2 + 3 * 4
     var y = 10 / 2 + 1
     var b = not false
@@ -9,6 +8,8 @@ void main() {
     var l = true or false
     var i = false or false
     var u = true == true
-
-
+    var m = not (100 == 5 or 60 / 5 == 12)
+    var d = "Hello "
+    var f = "Hello " + "World" + "!"
+    var as = 8 - 4 - 2 # if left associative:   2, right associative: 6
 }

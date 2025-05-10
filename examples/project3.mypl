@@ -1,0 +1,6 @@
+void main() {
+    # Complex nested expressions
+    var x = (5 * 8 - (8 + (90 / 5 + 10)))  # → 40 - (8 + (18 + 10)) → 4
+    var y = (3 + 2) * 4 == 20               # → true
+    var z = not (10 / 2 == 5 or false)      # → false
+}

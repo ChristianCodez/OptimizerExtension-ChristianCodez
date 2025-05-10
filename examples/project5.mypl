@@ -1,0 +1,9 @@
+void main() {
+    # Division and precedence
+    var a = 10 / 2 / 2                 # → 2 (left-associative)
+    var b = 2 + 3 * 4 / 2              # → 8 (not 10)
+    
+    # Non-optimizable cases (variables)
+    var x = 5
+    var c = x * 2                       # Should NOT fold (runtime value)
+}

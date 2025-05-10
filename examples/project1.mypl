@@ -1,0 +1,7 @@
+void main() {
+    # Simple arithmetic
+    var a = 2 + 3 * 4          # → 14
+    var b = (10 / 2) + 1        # → 6
+    var c = 8 - 4 - 2           # → 2 (left-associative)
+    var d = 2 * (3 + 4)         # → 14
+}

@@ -1,0 +1,5 @@
+void main() {
+    var a = null == null    # → true
+    var b = null != "text"  # → true
+    var c = not (null == 5) # → true
+}

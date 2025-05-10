@@ -1,0 +1,7 @@
+void main() {
+    # Boolean literals
+    var t = not false                  # → true
+    var f = true and false             # → false
+    var x = (true or false) == true    # → true
+    var y = not (100 == 5) and true    # → true
+}

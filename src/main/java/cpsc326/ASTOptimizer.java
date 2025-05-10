@@ -1,10 +1,3 @@
-/**
-* CPSC 326, Spring 2025
-* Optimizer Final Project implementation.
-* 
-* Christian Carrington
-*/
-
 package cpsc326;
 
 public class ASTOptimizer implements Visitor {
@@ -96,7 +89,6 @@ public class ASTOptimizer implements Visitor {
     // --------------------------------------------------------------------
 
     public void visit(BasicExpr node) {
-        // just pass along
         currExpr = node;
     }
 
@@ -136,7 +128,113 @@ public class ASTOptimizer implements Visitor {
                 try {
                     String op = node.binaryOp.lexeme;
 
-                    // Integer folding
+                    // --- Strength Reduction: Replace * or / with shifts for powers of 2 ---
+                    if (lt.tokenType == TokenType.INT_VAL && rt.tokenType == TokenType.INT_VAL) {
+                        int a = Integer.parseInt(lt.lexeme);
+                        int b = Integer.parseInt(rt.lexeme);
+
+                        // Check if 'b' is a power of 2 (for * or / optimizations)
+                        if (b > 0 && (b & (b - 1)) == 0) { // e.g., 2, 4, 8, 16...
+                            int shift = Integer.numberOfTrailingZeros(b); // log2(b)
+                            switch (op) {
+                                case "*":
+                                    currExpr = wrapLiteral(
+                                            new Token(TokenType.INT_VAL,
+                                                    Integer.toString(a << shift),
+                                                    lt.line, lt.column));
+                                    return;
+                                case "/":
+                                    currExpr = wrapLiteral(
+                                            new Token(TokenType.INT_VAL,
+                                                    Integer.toString(a >> shift),
+                                                    lt.line, lt.column));
+                                    return;
+                            }
+                        }
+                    }
+
+                    // Handle equality and relational operators first (they always return bool)
+                    if (op.equals("==") || op.equals("!=") || op.equals("<") ||
+                            op.equals("<=") || op.equals(">") || op.equals(">=")) {
+
+                        boolean result = false;
+
+                        // Integer comparisons
+                        if (lt.tokenType == TokenType.INT_VAL && rt.tokenType == TokenType.INT_VAL) {
+                            int a = Integer.parseInt(lt.lexeme);
+                            int b = Integer.parseInt(rt.lexeme);
+                            switch (op) {
+                                case "==":
+                                    result = a == b;
+                                    break;
+                                case "!=":
+                                    result = a != b;
+                                    break;
+                                case "<":
+                                    result = a < b;
+                                    break;
+                                case "<=":
+                                    result = a <= b;
+                                    break;
+                                case ">":
+                                    result = a > b;
+                                    break;
+                                case ">=":
+                                    result = a >= b;
+                                    break;
+                            }
+                        }
+                        // Double comparisons
+                        else if (lt.tokenType == TokenType.DOUBLE_VAL && rt.tokenType == TokenType.DOUBLE_VAL) {
+                            double a = Double.parseDouble(lt.lexeme);
+                            double b = Double.parseDouble(rt.lexeme);
+                            switch (op) {
+                                case "==":
+                                    result = a == b;
+                                    break;
+                                case "!=":
+                                    result = a != b;
+                                    break;
+                                case "<":
+                                    result = a < b;
+                                    break;
+                                case "<=":
+                                    result = a <= b;
+                                    break;
+                                case ">":
+                                    result = a > b;
+                                    break;
+                                case ">=":
+                                    result = a >= b;
+                                    break;
+                            }
+                        }
+                        // Boolean comparisons
+                        else if (lt.tokenType == TokenType.BOOL_VAL && rt.tokenType == TokenType.BOOL_VAL) {
+                            boolean a = Boolean.parseBoolean(lt.lexeme);
+                            boolean b = Boolean.parseBoolean(rt.lexeme);
+                            switch (op) {
+                                case "==":
+                                    result = a == b;
+                                    break;
+                                case "!=":
+                                    result = a != b;
+                                    break;
+                            }
+                        }
+                        // Null comparisons
+                        else if (lt.tokenType == TokenType.NULL_VAL || rt.tokenType == TokenType.NULL_VAL) {
+                            result = lt.tokenType == rt.tokenType;
+                            if (op.equals("!="))
+                                result = !result;
+                        }
+
+                        currExpr = wrapLiteral(
+                                new Token(TokenType.BOOL_VAL, Boolean.toString(result), lt.line, lt.column));
+                        return;
+                    }
+
+                    // Handle arithmetic operations (only for int/double)
                     if (lt.tokenType == TokenType.INT_VAL && rt.tokenType == TokenType.INT_VAL) {
                         int a = Integer.parseInt(lt.lexeme);
                         int b = Integer.parseInt(rt.lexeme);
@@ -160,13 +258,11 @@ public class ASTOptimizer implements Visitor {
                             default:
                                 throw new UnsupportedOperationException();
                         }
-
                         currExpr = wrapLiteral(
                                 new Token(TokenType.INT_VAL, Integer.toString(result), lt.line, lt.column));
                         return;
                     }
 
-                    // Double folding
                     if (lt.tokenType == TokenType.DOUBLE_VAL && rt.tokenType == TokenType.DOUBLE_VAL) {
                         double a = Double.parseDouble(lt.lexeme);
                         double b = Double.parseDouble(rt.lexeme);
@@ -190,17 +286,16 @@ public class ASTOptimizer implements Visitor {
                             default:
                                 throw new UnsupportedOperationException();
                         }
-
                         currExpr = wrapLiteral(
                                 new Token(TokenType.DOUBLE_VAL, Double.toString(result), lt.line, lt.column));
                         return;
                     }
 
-                    // Boolean folding
+                    // Handle boolean operations
                     if (lt.tokenType == TokenType.BOOL_VAL && rt.tokenType == TokenType.BOOL_VAL) {
                         boolean a = Boolean.parseBoolean(lt.lexeme);
                         boolean b = Boolean.parseBoolean(rt.lexeme);
-                        boolean result;
+                        boolean result = false;
                         switch (op) {
                             case "and":
                                 result = a && b;
@@ -213,6 +308,17 @@ public class ASTOptimizer implements Visitor {
                         }
                         currExpr = wrapLiteral(
                                 new Token(TokenType.BOOL_VAL, Boolean.toString(result), lt.line, lt.column));
+                        return;
+                    }
+
+                    // Handle string concatenation
+                    if (lt.tokenType == TokenType.STRING_VAL && rt.tokenType == TokenType.STRING_VAL
+                            && op.equals("+")) {
+                        String a = lt.lexeme.substring(0, lt.lexeme.length());
+                        String b = rt.lexeme.substring(0, rt.lexeme.length());
+                        String result = a + b;
+                        currExpr = wrapLiteral(
+                                new Token(TokenType.STRING_VAL, result, lt.line, lt.column));
                         return;
                     }
 

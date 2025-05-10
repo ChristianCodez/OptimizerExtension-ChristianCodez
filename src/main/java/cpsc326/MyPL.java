@@ -103,11 +103,9 @@ public class MyPL {
       p.accept(new ASTOptimizer());
       PrintVisitor v = new PrintVisitor();
       p.accept(v);
-
     } catch (MyPLException e) {
       System.err.println(e.getMessage());
     }
-    // System.out.println("No static errors found");
   }
 
   /**
@@ -117,7 +115,18 @@ public class MyPL {
    * @param input The mypl program as an input stream
    */
   private static void irMode(InputStream input) {
-    System.out.println("IR mode not yet supported");
+    try {
+      Lexer lexer = new Lexer(input);
+      ASTParser parser = new ASTParser(lexer);
+      Program p = parser.parse();
+      p.accept(new SemanticChecker());
+      p.accept(new ASTOptimizer());
+      VM vm = new VM();
+      p.accept(new CodeGenerator(vm));
+      System.out.println(vm);
+    } catch (MyPLException e) {
+      System.err.println(e.getMessage());
+    }
   }
 
   /**
@@ -126,7 +135,18 @@ public class MyPL {
    * @param input The mypl program as an input stream
    */
   private static void runMode(InputStream input) {
-    System.out.println("RUN mode not yet supported");
+    try {
+      Lexer lexer = new Lexer(input);
+      ASTParser parser = new ASTParser(lexer);
+      Program p = parser.parse();
+      p.accept(new SemanticChecker());
+      p.accept(new ASTOptimizer());
+      VM vm = new VM();
+      p.accept(new CodeGenerator(vm));
+      vm.run();
+    } catch (MyPLException e) {
+      System.err.println(e.getMessage());
+    }
   }
 
   /**
@@ -135,7 +155,19 @@ public class MyPL {
    * @param input The mypl program as an input stream
    */
   private static void debugMode(InputStream input) {
-    System.out.println("DEBUG mode not yet supported");
+    try {
+      Lexer lexer = new Lexer(input);
+      ASTParser parser = new ASTParser(lexer);
+      Program p = parser.parse();
+      p.accept(new SemanticChecker());
+      p.accept(new ASTOptimizer());
+      VM vm = new VM();
+      vm.debugMode(true);
+      p.accept(new CodeGenerator(vm));
+      vm.run();
+    } catch (MyPLException e) {
+      System.err.println(e.getMessage());
+    }
   }
 
   /**

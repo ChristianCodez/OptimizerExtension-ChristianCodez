@@ -310,16 +310,10 @@ public class ASTParser {
     eat(TokenType.ID, "ate a ID");
     if (match(TokenType.ASSIGN)) {
       varStmt.expr = Optional.of(var_init());
-
-      System.out
-          .println("After parsing var init, current token: " + currToken.tokenType + " (" + currToken.lexeme + ")");
     } else if (match(TokenType.COLON)) {
       varStmt.dataType = Optional.of(var_type());
       if (match(TokenType.ASSIGN)) {
         varStmt.expr = Optional.of(var_init());
-
-        System.out
-            .println("After parsing var init, current token: " + currToken.tokenType + " (" + currToken.lexeme + ")");
       }
     } else {
       error("Did not get expected type");
