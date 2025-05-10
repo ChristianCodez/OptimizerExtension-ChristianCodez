@@ -13,15 +13,15 @@ import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.ArgumentParserException;
 import net.sourceforge.argparse4j.inf.Namespace;
 
-
 /**
  * The MyPL class serves as the main entry point to the
- * interpreter. 
+ * interpreter.
  */
 public class MyPL {
 
   /**
    * Print token information for the given mypl program.
+   * 
    * @param input The mypl program as an input stream
    */
   private static void lexMode(InputStream input) {
@@ -32,15 +32,15 @@ public class MyPL {
         t = lexer.nextToken();
         System.out.println(t);
       } while (t.tokenType != TokenType.EOS);
-    } catch(MyPLException e) {
+    } catch (MyPLException e) {
       System.err.println(e.getMessage());
     }
   }
 
-  
   /**
    * Parse the given mypl program and output the first error found, if
    * any, otherwise nothing is printed.
+   * 
    * @param input The mypl program as an input stream
    */
   private static void parseMode(InputStream input) {
@@ -48,13 +48,14 @@ public class MyPL {
       Lexer lexer = new Lexer(input);
       SimpleParser parser = new SimpleParser(lexer);
       parser.parse();
-    } catch(MyPLException e) {
+    } catch (MyPLException e) {
       System.err.println(e.getMessage());
     }
   }
 
   /**
    * Pretty print the given mypl program.
+   * 
    * @param input The mypl program as an input stream
    */
   private static void printMode(InputStream input) {
@@ -64,14 +65,15 @@ public class MyPL {
       Program p = parser.parse();
       PrintVisitor v = new PrintVisitor();
       p.accept(v);
-    } catch(MyPLException e) {
+    } catch (MyPLException e) {
       System.err.println(e.getMessage());
     }
   }
-  
+
   /**
    * Perform a semantic analysis check of the given mypl program and
    * output first error found, if any, otherwise nothing is printed.
+   * 
    * @param input The mypl program as an input stream
    */
   private static void checkMode(InputStream input) {
@@ -80,15 +82,38 @@ public class MyPL {
       ASTParser parser = new ASTParser(lexer);
       Program p = parser.parse();
       p.accept(new SemanticChecker());
-    } catch(MyPLException e) {
+    } catch (MyPLException e) {
       System.err.println(e.getMessage());
     }
     System.out.println("No static errors found");
   }
-  
+
+  /**
+   * Perform a semantic analysis check of the given mypl program and
+   * output first error found, if any, otherwise nothing is printed.
+   * 
+   * @param input The mypl program as an input stream
+   */
+  private static void optimizeMode(InputStream input) {
+    try {
+      Lexer lexer = new Lexer(input);
+      ASTParser parser = new ASTParser(lexer);
+      Program p = parser.parse();
+      p.accept(new SemanticChecker());
+      p.accept(new ASTOptimizer());
+      PrintVisitor v = new PrintVisitor();
+      p.accept(v);
+
+    } catch (MyPLException e) {
+      System.err.println(e.getMessage());
+    }
+    // System.out.println("No static errors found");
+  }
+
   /**
    * Output the intermediate representation of the given mypl
-   * program. 
+   * program.
+   * 
    * @param input The mypl program as an input stream
    */
   private static void irMode(InputStream input) {
@@ -96,7 +121,8 @@ public class MyPL {
   }
 
   /**
-   * Run the given mypl program. 
+   * Run the given mypl program.
+   * 
    * @param input The mypl program as an input stream
    */
   private static void runMode(InputStream input) {
@@ -105,27 +131,28 @@ public class MyPL {
 
   /**
    * Run the given mypl program in debug mode.
+   * 
    * @param input The mypl program as an input stream
    */
   private static void debugMode(InputStream input) {
     System.out.println("DEBUG mode not yet supported");
   }
-  
+
   /**
    * Parse the command line options and run the given mypl program in
    * the corresponding mode (either lex, parse, print, check, ir, or
-   * run). 
+   * run).
    */
   public static void main(String[] args) {
     InputStream input = System.in;
     // set up the command line (cmd) argument parser
     ArgumentParser cmdParser = ArgumentParsers.newFor("mypl").build()
-      .defaultHelp(true)
-      .description("MyPL interpreter.");
+        .defaultHelp(true)
+        .description("MyPL interpreter.");
     cmdParser.addArgument("-m", "--mode")
-      .choices("LEX", "PARSE", "PRINT", "CHECK", "IR", "RUN", "DEBUG")
-      .setDefault("RUN")
-      .help("specify execution mode");
+        .choices("LEX", "PARSE", "PRINT", "CHECK", "OPTIMIZE", "IR", "RUN", "DEBUG")
+        .setDefault("RUN")
+        .help("specify execution mode");
     cmdParser.addArgument("file").nargs("?").help("mypl file to execute");
     // validate the command line arguments
     Namespace ns = null;
@@ -157,6 +184,8 @@ public class MyPL {
       printMode(input);
     else if (mode.equals("CHECK"))
       checkMode(input);
+    else if (mode.equals("OPTIMIZE"))
+      optimizeMode(input);
     else if (mode.equals("IR"))
       irMode(input);
     else if (mode.equals("DEBUG"))

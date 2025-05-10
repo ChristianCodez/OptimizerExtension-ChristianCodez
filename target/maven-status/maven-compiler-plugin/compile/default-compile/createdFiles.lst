@@ -12,7 +12,6 @@ cpsc326\BasicExpr.class
 cpsc326\ReturnStmt.class
 cpsc326\UnaryExpr.class
 cpsc326\VarRef.class
-cpsc326\tmp.class
 cpsc326\TokenType.class
 cpsc326\Program.class
 cpsc326\MyPLException.class
@@ -34,5 +33,6 @@ cpsc326\SimpleParser.class
 cpsc326\VarStmt.class
 cpsc326\Expr.class
 cpsc326\AssignStmt.class
+cpsc326\ASTOptimizer.class
 cpsc326\PrintVisitor.class
 cpsc326\RValue.class

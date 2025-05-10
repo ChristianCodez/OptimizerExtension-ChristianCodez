@@ -1,9 +1,0 @@
--------------------------------------------------------------------------------
-Test set: cpsc326.SymbolTableTests
--------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in cpsc326.SymbolTableTests
-cpsc326.SymbolTableTests.symbolTableMultipleAdds -- Time elapsed: 0.006 s
-cpsc326.SymbolTableTests.symbolTableMultipleEnvironments -- Time elapsed: 0.003 s
-cpsc326.SymbolTableTests.emptySymbolTable -- Time elapsed: 0 s
-cpsc326.SymbolTableTests.symbolTableSimpleAdd -- Time elapsed: 0 s
-cpsc326.SymbolTableTests.symbolTablePushAndPop -- Time elapsed: 0 s

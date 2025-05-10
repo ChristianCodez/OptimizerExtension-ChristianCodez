@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Unit tests for the SemanticChecker implementation
  */
-class SemanticCheckerTests {
+class OptimizerFoldingTests {
 
   /**
    * Helper to build an input string.
@@ -31,28 +31,40 @@ class SemanticCheckerTests {
     return null;
   }
 
-  // ----------------------------------------------------------------------
-  // Basic Function Definitions
+  private void assertLiteral(Expr expr, String expectedLexeme, TokenType expectedType) {
+    assertTrue(expr instanceof BasicExpr, "Expected BasicExpr");
+    BasicExpr basic = (BasicExpr) expr;
 
-  @Test
-  void smallestValidProgram() {
-    var p = "void main() {}";
-    new ASTParser(new Lexer(istream(p))).parse().accept(new SemanticChecker());
+    assertTrue(basic.rvalue instanceof SimpleRValue, "Expected SimpleRValue");
+    SimpleRValue val = (SimpleRValue) basic.rvalue;
+
+    assertEquals(expectedLexeme, val.literal.lexeme, "Incorrect literal value");
+    assertEquals(expectedType, val.literal.tokenType, "Incorrect literal type");
   }
 
+  // ----------------------------------------------------------------------
+  // Basic Function Definitions
   @Test
-  void validFunctionDefs() {
+  void constantFoldingTest() {
     var p = """
-        void f1(x: int) {}
-        void f2(x: double) {}
-        bool f3(x: bool) {}
-        string f4(p1: int, p2: bool) {}
-        void f5(p1: double, p2: int, p3: string) {}
-        int f6(p1: int, p2: int, p3: string) {}
-        [int] f7() {}
-        void main() {}
+          void main() {
+            var x = 2 + 3 * 4
+          }
         """;
-    new ASTParser(new Lexer(istream(p))).parse().accept(new SemanticChecker());
+    Program prog = new ASTParser(new Lexer(istream(p))).parse();
+
+    // First check semantic correctness
+    prog.accept(new SemanticChecker());
+
+    // Run the optimizer
+    prog.accept(new ASTOptimizer());
+
+    // Now verify that the expression is folded
+    FunDef mainFun = prog.functions.get(0);
+    VarStmt varStmt = (VarStmt) mainFun.stmts.get(0);
+    Expr folded = varStmt.expr.get();
+
+    assertLiteral(folded, "14", TokenType.INT_VAL);
   }
 
   @Test

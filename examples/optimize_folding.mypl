@@ -1,0 +1,14 @@
+void main() {
+    
+    var x = 2 + 3 * 4
+    var y = 10 / 2 + 1
+    var b = not false
+    var z = ((5*8) - (8 + (90/(5+10))))
+    var a = true and true
+    var g = false and true
+    var l = true or false
+    var i = false or false
+    var u = true == true
+
+
+}
