@@ -202,8 +202,7 @@ public class ASTParser {
   private List<Stmt> block() {
     List<Stmt> block = new ArrayList<>();
     eat(TokenType.LBRACE, "ate a LBRACE");
-    while (matchAny(List.of(TokenType.VAR, TokenType.WHILE, TokenType.IF, TokenType.FOR,
-        TokenType.RETURN, TokenType.ID))) {
+    while (!match(TokenType.RBRACE)) {
       block.add(stmt());
     }
     eat(TokenType.RBRACE, "ate a RBRACE");
@@ -311,10 +310,16 @@ public class ASTParser {
     eat(TokenType.ID, "ate a ID");
     if (match(TokenType.ASSIGN)) {
       varStmt.expr = Optional.of(var_init());
+
+      System.out
+          .println("After parsing var init, current token: " + currToken.tokenType + " (" + currToken.lexeme + ")");
     } else if (match(TokenType.COLON)) {
       varStmt.dataType = Optional.of(var_type());
       if (match(TokenType.ASSIGN)) {
         varStmt.expr = Optional.of(var_init());
+
+        System.out
+            .println("After parsing var init, current token: " + currToken.tokenType + " (" + currToken.lexeme + ")");
       }
     } else {
       error("Did not get expected type");
@@ -434,31 +439,91 @@ public class ASTParser {
     return exprs;
   }
 
+  // private Expr expr() {
+  // Expr expr;
+  // if (match(TokenType.LPAREN)) {
+  // advance();
+  // expr = expr();
+  // eat(TokenType.RPAREN, "ate a RPAREN");
+  // } else if (match(TokenType.NOT)) {
+  // UnaryExpr unaryExpr = new UnaryExpr();
+  // unaryExpr.unaryOp = currToken;
+  // advance();
+  // unaryExpr.expr = expr();
+  // expr = unaryExpr;
+  // } else {
+  // BasicExpr basicExpr = new BasicExpr();
+  // basicExpr.rvalue = rvalue();
+  // expr = basicExpr;
+  // }
+  // while (isBinOp()) {
+  // BinaryExpr binExpr = new BinaryExpr();
+  // bin_op(binExpr);
+  // binExpr.rhs = expr();
+  // binExpr.lhs = expr;
+  // expr = binExpr;
+  // }
+  // return expr;
+  // }
+
   private Expr expr() {
+    return parseExpr(0);
+  }
+
+  // helper
+
+  private Expr primaryExpr() {
     Expr expr;
     if (match(TokenType.LPAREN)) {
       advance();
       expr = expr();
-      eat(TokenType.RPAREN, "ate a RPAREN");
+      eat(TokenType.RPAREN, "expected ')'");
     } else if (match(TokenType.NOT)) {
       UnaryExpr unaryExpr = new UnaryExpr();
       unaryExpr.unaryOp = currToken;
       advance();
-      unaryExpr.expr = expr();
+      unaryExpr.expr = primaryExpr(); // recurse here too
       expr = unaryExpr;
     } else {
       BasicExpr basicExpr = new BasicExpr();
       basicExpr.rvalue = rvalue();
       expr = basicExpr;
     }
-    while (isBinOp()) {
-      BinaryExpr binExpr = new BinaryExpr();
-      bin_op(binExpr);
-      binExpr.rhs = expr();
-      binExpr.lhs = expr;
-      expr = binExpr;
-    }
     return expr;
+  }
+
+  private int getPrecedence(TokenType op) {
+    return switch (op) {
+      case TIMES, DIVIDE -> 4;
+      case PLUS, MINUS -> 3;
+      case EQUAL, NOT_EQUAL,
+          LESS, LESS_EQ,
+          GREATER, GREATER_EQ ->
+        2;
+      case AND -> 1;
+      case OR -> 0;
+      default -> -100; // Not a binary operator
+    };
+  }
+
+  private Expr parseExpr(int minPrecedence) {
+    Expr left = primaryExpr();
+
+    while (isBinOp() && getPrecedence(currToken.tokenType) >= minPrecedence) {
+      Token op = currToken;
+      int precedence = getPrecedence(op.tokenType);
+      advance();
+
+      Expr right = parseExpr(precedence + 1);
+
+      BinaryExpr bin = new BinaryExpr();
+      bin.lhs = left;
+      bin.rhs = right;
+      bin.binaryOp = op;
+      left = bin;
+    }
+
+    return left;
   }
 
   private void bin_op(BinaryExpr expr) {

@@ -215,6 +215,7 @@ public class ASTOptimizer implements Visitor {
                                 new Token(TokenType.BOOL_VAL, Boolean.toString(result), lt.line, lt.column));
                         return;
                     }
+
                 } catch (Exception e) {
                     // silently ignore if folding fails
                 }

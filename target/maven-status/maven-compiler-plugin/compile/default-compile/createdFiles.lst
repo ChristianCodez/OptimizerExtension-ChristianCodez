@@ -26,6 +26,7 @@ cpsc326\SemanticChecker.class
 cpsc326\BinaryExpr.class
 cpsc326\WhileStmt.class
 cpsc326\StructDef.class
+cpsc326\ASTParser$1.class
 cpsc326\NewArrayRValue.class
 cpsc326\AST.class
 cpsc326\Token.class
